@@ -43,7 +43,7 @@ class HomePage extends Component {
     return (
       <div className="row">
         <div className="col-md-8">
-          <SearchBox onSubmit={() => this.findEntry()} />
+          <SearchBox onSubmit={() => this.findEntry()} /> <hr/>
           {this.state.showOriginal ? 
             <SimpleTable list={this.state.list} />
            : 
