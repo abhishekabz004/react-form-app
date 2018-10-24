@@ -28,7 +28,7 @@ class SimpleForm extends Component {
   render() {
     return (
       <div className="container">
-        <form action="/action_page.php">
+        <form action="">
           <h3>Enter Client Details</h3>
           <div className="form-group">
             <label>NAME:</label>

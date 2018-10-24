@@ -2,39 +2,51 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SimpleForm from "./SimpleForm";
 import SimpleTable from "./SimpleTable";
+import SearchBox from "./SearchBox";
 
 class HomePage extends Component {
-  constructor() {
-    super();
-    var testObject = [
-      { userName: "Rach", shopName: "Rach Stores", status: "open" },
-      { userName: "Vinay", shopName: "Vinay Stores", status: "closed" },
-      {
-        userName: "Joe",
-        shopName: "Rach Stores",
-        status: "currently being transitioned"
-      }
-    ];
-
-    localStorage.setItem("testObject", JSON.stringify(testObject));
-
+  constructor(props) {
+    super(props);
     this.state = {
-      list: JSON.parse(localStorage.getItem("testObject"))
+      showOriginal: 1,
+      list: JSON.parse(localStorage.getItem("testObject")),
+      searchList: []
     };
+
+    this.showResults = this.showResults.bind(this);
+    this.findEntry = this.findEntry.bind(this);
   }
 
-  showResults() {
+  showResults(e) {
     console.log("submitted");
     this.setState({
-      list: JSON.parse(localStorage.getItem("testObject"))
+      showOriginal: 1,
+      list: JSON.parse(localStorage.getItem("testObject")),
+      searchList: JSON.parse(localStorage.getItem("searchResult"))
     });
+    e.preventDefault();
+  }
+  findEntry(e) {
+    console.log("submitted");
+    this.setState((prevState) => ({
+      showOriginal: 0,
+      list: JSON.parse(localStorage.getItem("testObject")),
+      searchList: prevState.searchList.concat(JSON.parse(localStorage.getItem("searchResult")))
+    }));
+    e.preventDefault();
+   
   }
 
   render() {
     return (
       <div className="row">
         <div className="col-md-8">
-          <SimpleTable list={this.state.list} />
+          <SearchBox onSubmit={() => this.findEntry()} />
+          {this.state.showOriginal ? 
+            <SimpleTable list={this.state.list} />
+           : 
+            <SimpleTable list={this.state.searchList} />
+          }
         </div>
         <div className="col-md-4">
           <SimpleForm onSubmit={() => this.showResults()} />
