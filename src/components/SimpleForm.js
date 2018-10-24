@@ -20,9 +20,10 @@ class SimpleForm extends Component {
       shopName: this.state.shopName,
       status: this.state.status
     };
-    list.push(newItem);
+    list.concat(newItem);
     console.log({ list });
     localStorage.setItem("testObject", JSON.stringify(list));
+    alert((localStorage.getItem("testObject")))
     this.props.onSubmit();
   }
   render() {

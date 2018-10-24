@@ -5,14 +5,21 @@ class SimpleTable extends Component {
     super(props);
   }
   render() {
-    const list = this.props.list;
-    const tableBody = list.map(entry => (
-      <tr key={entry.userName}>
-        <th scope="row">{entry.userName}</th>
-        <td>{entry.shopName}</td>
-        <td>{entry.status}</td>
-      </tr>
-    ));
+    var list = this.props.list;
+    const listString = JSON.stringify(list)
+    var tableBody = null
+    if (listString === "[]" || listString === ""){
+      tableBody = null
+    }
+    else {
+      list= [];
+      tableBody = list.map(entry => (
+        <tr key={entry.userName}>
+          <th scope="row">{entry.userName}</th>
+          <td>{entry.shopName}</td>
+          <td>{entry.status}</td>
+        </tr>
+      ));}
     return (
       <div className="container">
         <table className="table table-striped table-dark">

@@ -34,7 +34,7 @@ class HomePage extends Component {
       searchList: prevState.searchList.concat(JSON.parse(localStorage.getItem("searchResult")))
     }));
     e.preventDefault();
-   
+
   }
 
   render() {
@@ -44,12 +44,12 @@ class HomePage extends Component {
       <div className="row">
         <div className="col-md-8">
           <SearchBox onSubmit={() => this.findEntry()} />
-          {this.state.showOriginal ? 
+          {this.state.showOriginal ?
             <SimpleTable list={this.state.list} />
-           : 
-            (searchResult == dummy)? 
+            :
+            (searchResult == dummy) ?
               <p>No valid result </p> :
-                <SimpleTable list={this.state.searchList} />
+              <SimpleTable list={this.state.searchList} />
           }
         </div>
         <div className="col-md-4">
