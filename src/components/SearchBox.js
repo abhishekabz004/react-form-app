@@ -19,11 +19,17 @@ class SearchBox extends Component {
   sendKey() {
     const key = JSON.stringify(this.state.searchKey);
     const list = JSON.parse(localStorage.getItem("testObject"));
+    let flag = false;
     for (var entry in list) {
       const val = JSON.stringify(list[entry].userName);
       if (val === key) {
+        flag = true;
         localStorage.setItem("searchResult", JSON.stringify(list[entry]));
       }
+    }
+    if(!flag){
+      let val = []
+      localStorage.setItem("searchResult", JSON.stringify(val));
     }
     this.props.onSubmit();
   }

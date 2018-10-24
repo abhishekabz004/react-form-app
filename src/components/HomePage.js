@@ -22,7 +22,7 @@ class HomePage extends Component {
     this.setState({
       showOriginal: 1,
       list: JSON.parse(localStorage.getItem("testObject")),
-      searchList: JSON.parse(localStorage.getItem("searchResult"))
+      searchList: []
     });
     e.preventDefault();
   }
@@ -38,6 +38,8 @@ class HomePage extends Component {
   }
 
   render() {
+    var dummy = "[]"
+    var searchResult = JSON.stringify(this.state.searchList)
     return (
       <div className="row">
         <div className="col-md-8">
@@ -45,7 +47,9 @@ class HomePage extends Component {
           {this.state.showOriginal ? 
             <SimpleTable list={this.state.list} />
            : 
-            <SimpleTable list={this.state.searchList} />
+            (searchResult == dummy)? 
+              <p>No valid result </p> :
+                <SimpleTable list={this.state.searchList} />
           }
         </div>
         <div className="col-md-4">
